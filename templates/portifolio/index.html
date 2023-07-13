@@ -1,0 +1,418 @@
+{% load humanize%}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Accounts Monitor</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="{% static 'assets/img/logo.jpg' %}" alt="" class="img-fluid rounded-circle">
+        {% for infor in infors %}
+        <h1 class="text-light"><a href="index.html">{{ infor.companyName }}</a></h1>
+        {% endfor %}
+        {% for link in links %}
+        <div class="social-links mt-3 text-center">
+          <a href="{{link.twitter}}" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="{{link.facebook}}" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="{{link.instagram}}" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="{{link.skype}}" class="google-plus"><i class="bx bxl-skype"></i></a>
+          <a href="{{link.linkedin}}" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+        {% endfor %}
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+          <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+          <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
+          <li><a href="#testimonials" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Testimonials</span></a></li>
+          <li><a href="#pricing" class="nav-link scrollto"><i class="bx bx-money"></i> <span>Pricing</span></a></li>
+          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="hero-container" data-aos="fade-in">
+      {% for infor in infors %}
+      <h1 class="company-name">Accounts Monitor</h1>
+      {% endfor %}
+      <p>we do <span class="typed" data-typed-items="{%for service in services %}{{service.serviceName}},{%endfor%}"></span></p>
+    </div>
+    {% include 'alert.html' %}
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>About</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+        {% for infor in infors %}
+        <div class="row">
+
+          <div class="col-lg-4" data-aos="fade-right">
+            <img src="{{infor.teamsPhoto.url}}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+            <h3>UI/UX Designer &amp; Web Developer.</h3>
+            <p class="fst-italic">
+              {{infor.overview}}
+            </p>
+            <div class="row">
+            <p>
+              {{infor.description}}
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Facts Section ======= -->
+    <section id="facts" class="facts">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Facts</h2>
+          <p>know us abit more</p>
+        </div>
+
+        <div class="row no-gutters">
+          {% for fact in facts %}
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
+            <div class="count-box">
+              <i class="bi bi-emoji-smile"></i>
+              <span data-purecounter-start="0" data-purecounter-end="{{ fact.totalClients }}" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Happy Clients</strong> consequuntur quae</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="count-box">
+              <i class="bi bi-journal-richtext"></i>
+              <span data-purecounter-start="0" data-purecounter-end="{{ fact.projects }}" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Projects</strong> </p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="count-box">
+              <i class="bi bi-headset"></i>
+              <span data-purecounter-start="0" data-purecounter-end="{{ fact.hoursSupport }}" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Hours Of Support</strong> aut commodi quaerat</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="count-box">
+              <i class="bi bi-people"></i>
+              <span data-purecounter-start="0" data-purecounter-end="{{ fact.totalTeam }}" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Hard Workers</strong> rerum asperiores dolor</p>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+
+      </div>
+    </section><!-- End Facts Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>we are dedicated to offering results take alook how</p>
+        </div>
+
+        <div class="row">
+          {% for service in services %}
+          <div class="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
+            <div class="icon"><i class="{{service.icon}}"></i></div>
+            <h4 class="title"><a href="">{{ service.serviceName}}</a></h4>
+            <p class="description">{{ service.serviceDescription }}</p>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <div>
+      <section id="testimonials" class="testimonials section-bg">
+        <div class="container">
+          <div class="section-title">
+            <h2>Testimonials</h2>
+            <p>What are our customers saying</p>
+          </div>
+          <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="50000">
+            <div class="swiper-wrapper">
+              
+              {% for testimony in testimonials %}
+              <div class="swiper-slide">
+                <div class="testimonial-item" data-aos="fade-up">
+                  <img src="{{ testimony.customerPhoto.url }}" class="testimonial-img" alt="">
+                  <h3>{{ tetimony.customerPhoto}}</h3>
+                  <h4>{{ testimony.customerJobPosition }}</h4>
+                  <p>
+                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                    {{ testimony.CustomerMessage }}
+                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                </div>
+              </div><!-- End testimonial item -->
+              {% endfor %}
+  
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+  
+        </div>
+      </section><!-- End Testimonials Section -->
+    </div>
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container">
+        <div class="section-title">
+          
+          <h2>Pricing</h2>
+          <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+        </div>
+
+        <div class="row">
+          {% for price in prices %}
+          <div class="col-lg-4 col-md-6">
+            <div class="box">
+              <h3>Monthly</h3>
+              <h4><sup>ksh</sup>{{ price.priceMonthly | intcomma }}<span> / month</span></h4>
+              <ul>
+                {% for service in services %}
+                <li>{{ service.serviceName}}</li>
+                {% endfor %}
+                <li class="na">pay anytime</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="sms:+254740562740?&body=Hi%2520there%252C%2520I%2520would%2527d%2520love%2520to%2520subscribe%2520to%2520your%2520monthly%2520package..." class="btn-buy" data-bs-toggle="modal" data-bs-target="#mymodal">Get started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box">
+              <span class="advanced">Popular</span>
+              <h3>Quartely</h3>
+              <h4><sup>ksh</sup>{{ price.priceQuartely | intcomma }}<span> / month</span></h4>
+              <h6><sup>save</sup>{{ quota | intcomma }}<span> / year</span></h6>
+              <ul>
+                {% for service in services %}
+                <li>{{ service.serviceName}}</li>
+                {% endfor %}
+                <li>pay anytime</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="sms:+254740562740?&body=Hi%2520there%252C%2520I%2520would%2527d%2520love%2520to%2520subscribe%2520to%2520your%2520quartely%2520package..." class="btn-buy" data-bs-toggle="modal" data-bs-target="#mymodal">Get started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
+            <div class="box">
+              <h3>Yearly</h3>
+              <h4><sup>ksh</sup>{{ price.priceYearly | intcomma }}<span> / month</span></h4>
+              <h6><sup>save</sup>{{ annual | intcomma  }}<span> / year</span></h6>
+              <ul>
+                {% for service in services %}
+                <li>{{ service.serviceName}}</li>
+                {% endfor %}
+                <li>pay anytime</li>
+              </ul>
+              <div class="btn-wrap">
+                <a href="sms:+254740562740?&body=Hi%2520there%252C%2520I%2520would%2527d%2520love%2520to%2520subscribe%2520to%2520your%2520yearly%2520package..." class="btn-buy" data-bs-toggle="modal" data-bs-target="#mymodal">Get started</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+
+
+    <!-- ======= promotion  Section ======= -->
+    <section id="skills" class="skills section-bg">
+      <div class="container">
+        
+        <div>
+          {%for infor in infors%}
+          <div class="section-title promotion">
+            <h2>Promotion</h2>
+            <p>{{infor.promotion_message}}</p>
+          </div>
+        
+  
+          <div class="row skills-content">
+            
+            <div class="col-lg-12" data-aos="fade-up">
+              
+              <div class="progress">
+                <span class="skill">Customers Enrolled <i class="val">{{infor.customersEnrolled}}</i></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{infor.percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+
+              <div class="btn-wrap">
+                <a href="sms:+254740562740?&body=Hi%2520there%252C%2520I%2520would%2527d%2520love%2520to%2520subscribe%2520to%2520your%2520yearly%2520package..." class="btn-buy" data-bs-toggle="modal" data-bs-target="#mymodal">Get started</a>
+              </div>
+              
+          </div>
+          {% endfor %}
+        </div>
+        
+      </div>
+    </section><!-- End promotion Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>We are here for you 24/7</p>
+        </div>
+
+        <div class="row" data-aos="fade-in">
+
+          <div class="col-lg-5 d-flex align-items-stretch">
+            {% for contact in contacts %}
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>{{ contact.address }} {{ contact.location }}, Nairobi, Kenya</p>
+              </div>
+              
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>{{ contact.email }}</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p><a href ="tel:{{ contact.call }}">{{ contact.call }}</a></p>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="{% url 'contact' %}" method="POST" role="form" class="form">
+              <div class="row">
+                {% csrf_token %}
+                <div class="form-group col-md-6">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Phone Number</label>
+                  <input type="text" class="form-control" name="phone" id="phone" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Subject</label>
+                <input type="text" class="form-control" name="subject" id="subject" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Message</label>
+                <textarea class="form-control" name="message" rows="10" required></textarea>
+              </div>
+              <div class="text-center"><button type="submit" >Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <script>document.write(new Date().getFullYear())</script> <strong><span>Accounts Monitor</span></strong>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/typed.js/typed.umd.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
+
